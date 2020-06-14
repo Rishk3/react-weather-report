@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 const api = {
   key: "55d1aa468851b1944ab41742fef52718",
   base: "https://api.openweathermap.org/data/2.5/",
 };
 
 function App() {
-  const [query, setQuery] = useState("");
-  const [weather, setWeather] = useState({});
-  const [error, setError] = useState("");
-
+  var pos;
   function getCity(pos) {
     var xhr = new XMLHttpRequest();
     var lat = pos.lat;
@@ -31,18 +28,17 @@ function App() {
       if (xhr.readyState === 4 && xhr.status === 200) {
         var response = JSON.parse(xhr.responseText);
         var city = response.address.city;
+        console.log(city);
         fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
           .then((res) => res.json())
           .then((result) => {
             setWeather(result);
             setQuery("");
           });
-
         return;
       }
     }
   }
-
   const getDefault = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -55,9 +51,22 @@ function App() {
     }
   };
 
-  getDefault();
+  const [query, setQuery] = useState("");
+  const [weather, setWeather] = useState({});
+  const [error, setError] = useState("");
   const search = (evt) => {
     if (evt.key === "Enter") {
+      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+        .then((res) => res.json())
+        .then((result) => {
+          setWeather(result);
+          setQuery("");
+          cityErrorHandler(result);
+        });
+    }
+  };
+  const clickmee = () => {
+    {
       fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
         .then((res) => res.json())
         .then((result) => {
@@ -132,6 +141,16 @@ function App() {
             value={query}
             onKeyPress={search}
           />
+          <button className="btn" onClick={clickmee}>
+            Search
+          </button>
+          <button
+            className="btn"
+            onClick={getDefault}
+            style={{ marginLeft: "10px" }}
+          >
+            Mycity
+          </button>
         </div>
 
         {typeof weather.main != "undefined" ? (

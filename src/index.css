@@ -45,15 +45,23 @@ main {
   text-shadow: rgba(211, 7, 7, 0.75);
 }
 .search-box {
-  width: 100%;
-  margin: 0 0 75px;
+  width: 80%;
+  margin: 10px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+}
+.btn {
+  padding: 5px;
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.3);
+  margin-top: -25px;
 }
 
 .search-box .search-bar {
   display: block;
   width: 100%;
-  padding: 15px;
-
+  padding: 10px;
+  margin-right: 10px;
   appearance: none;
   background: none;
   border: none;
