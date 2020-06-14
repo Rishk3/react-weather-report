@@ -132,6 +132,7 @@ function App() {
     >
       <main>
         <p className="city-error">{error}</p>
+        <h2>Rishk3 Weather</h2>
         <div className="search-box">
           <input
             type="text"
