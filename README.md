@@ -1,2 +1,3 @@
 # react-weather-report
-serene-noyce-360752.netlify.app
+### Current time city weather reports
+[Live site ](https://serene-noyce-360752.netlify.app/).
