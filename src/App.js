@@ -31,7 +31,6 @@ function App() {
       if (xhr.readyState === 4 && xhr.status === 200) {
         var response = JSON.parse(xhr.responseText);
         var city = response.address.city;
-        console.log("processrequest city=> " + city);
         fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
           .then((res) => res.json())
           .then((result) => {
